@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 // import useFirebase from '../../Hooks/useFirebase';
 import useAuth from '../../Hooks/useAuth';
+import logo from '../../images/logo.webp';
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, handleLogout } = useAuth();
@@ -28,8 +29,9 @@ const Header = () => {
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
                                 <img
+                                    width="180px"
                                     className="h-10 "
-                                    src=""
+                                    src={logo}
                                     alt="Workflow"
                                 />
                             </div>
@@ -51,7 +53,7 @@ const Header = () => {
                                     </Link>
 
                                     <Link
-                                        to="/doctors"
+                                        to="/blogs"
                                         className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
                                         Blogs
@@ -84,7 +86,7 @@ const Header = () => {
 
                                                     <Menu as="div" className="relative inline-block text-left">
                                                         <div>
-                                                            <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 mr-4">
+                                                            <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-red-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 mr-4">
                                                                 Profile
                                                                 {/* <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" /> */}
                                                             </Menu.Button>

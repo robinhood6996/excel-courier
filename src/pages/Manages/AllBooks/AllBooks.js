@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { memo, useEffect, useState } from 'react';
-import useFirebase from '../../../Hooks/useFirebase';
 
 const AllBooks = memo(() => {
     const [bookings, setBookings] = useState([]);
@@ -40,34 +39,39 @@ const AllBooks = memo(() => {
     }
     return (
         <div>
-            <h2 className="text-3xl text-center font-bold mt-7">All Booked Services</h2>
-            <div className="container ml-10  mt-10">
+            <h2 className="text-3xl text-center font-bold mt-7">All Users Bookings</h2>
+            <div className="container mx-auto mt-10">
                 <div className="tables">
-                    <table className="table-auto border-collapse border p-5">
-                        <thead>
-                            <tr>
-                                <th className="border w-1/2 ...">Name Of Service</th>
-                                <th className="border w-1/4 ...">User</th>
-                                <th className="border w-1/4 ...">Weight</th>
-                                <th className="border w-2/4 ...">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+
+                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 border">
+                        <thead className="text-white">
                             {
-                                bookings.map(booking => <tr key={booking._id}>
-                                    <td className="border  p-2">{booking.service}</td>
-                                    <td className="border  p-2">{booking.email}</td>
-                                    <td className="border  p-2">{booking.weight}</td>
-                                    <td className="border  p-2">
-                                        {/* " p-2 rounded bg-yellow-400 text-white" */}
-                                        <button className={booking.status == 0 ? 'p-2 rounded bg-yellow-400 text-white' : 'p-2 rounded bg-green-800 text-white'} value="0" onClick={() => {
-                                            if (booking.status == 0) {
-                                                handleStatus(booking._id, 1);
+                                bookings.map(book => <tr key={book._id} class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                    <th className="p-3 text-left text-black">User</th>
+                                    <th className="p-3 text-left text-black">Service</th>
+                                    <th className="p-3 text-left text-black">Location</th>
+                                    <th className="p-3 text-left text-black">Weight</th>
+                                    <th className="p-3 text-left text-black" width="110px">Actions</th>
+                                </tr>)
+                            }
+
+                        </thead>
+                        <tbody class="flex-1 sm:flex-none">
+                            {
+                                bookings.map(book => <tr key={book._id} class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3">{book.email}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.service}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.departure_loc} to {book.delivery_loc}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.weight}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                        <button className={book.status == 0 ? 'p-2 rounded bg-yellow-400 text-white' : 'p-2 rounded bg-green-800 text-white'} value="0" onClick={() => {
+                                            if (book.status == 0) {
+                                                handleStatus(book._id, 1);
                                             } else {
-                                                handleStatus(booking._id, 0);
+                                                handleStatus(book._id, 0);
                                             }
-                                        }}>{booking.status == 0 ? 'Pending' : 'Approved'}</button>
-                                        <button className="p-2 rounded bg-red-800 text-white ml-2 mt-2" onClick={() => handleDelete(booking._id)}>Delete</button>
+                                        }}>{book.status == 0 ? 'Pending' : 'Approved'}</button>
+                                        <button className="p-2 rounded bg-red-400 text-white ml-2 mt-2" onClick={() => handleDelete(book._id)}>Delete</button>
                                     </td>
                                 </tr>)
                             }

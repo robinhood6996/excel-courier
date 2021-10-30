@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import useFirebase from '../../../Hooks/useFirebase';
+import './MyBooks.css';
 
 const MyBooks = () => {
     const { user, isLoading } = useAuth();
@@ -46,26 +47,30 @@ const MyBooks = () => {
     return (
         <div>
             <h2 className="text-3xl text-center font-bold mt-7">My Booked Services</h2>
-            <div className="container ml-10  mt-10">
+            <div className="container mx-auto mt-10">
                 <div className="tables">
-                    <table className="table-auto border-collapse border p-5">
-                        <thead>
-                            <tr>
-                                <th className="w-1/2 ...">Name Of Service</th>
-                                <th className="w-1/4 ...">User</th>
-                                <th className="w-1/4 ...">Weight</th>
-                                <th className="w-1/4 ...">Locations</th>
-                                <th className="w-1/4 ...">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+
+                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 border">
+                        <thead className="text-white">
                             {
-                                booking.map(book => <tr key={book._id}>
-                                    <td className="border p-2">{book.service}</td>
-                                    <td className="border  p-2">{book.email}</td>
-                                    <td className="border  p-2">{book.weight}</td>
-                                    <td className="border  p-2">{book.departure_loc} to {book.delivery_loc}</td>
-                                    <td className="border  p-2">
+                                booking.map(book => <tr key={book._id} class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                    <th className="p-3 text-left text-black">User</th>
+                                    <th className="p-3 text-left text-black">Service</th>
+                                    <th className="p-3 text-left text-black">Location</th>
+                                    <th className="p-3 text-left text-black">Weight</th>
+                                    <th className="p-3 text-left text-black" width="110px">Actions</th>
+                                </tr>)
+                            }
+
+                        </thead>
+                        <tbody class="flex-1 sm:flex-none">
+                            {
+                                booking.map(book => <tr key={book._id} class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3">{book.email}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.service}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.departure_loc} to {book.delivery_loc}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 truncate">{book.weight}</td>
+                                    <td className="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
                                         <button className={book.status == 0 ? 'p-2 rounded bg-yellow-400 text-white' : 'p-2 rounded bg-green-800 text-white'} value="0" onClick={() => {
                                             if (book.status == 0) {
                                                 handleStatus(book._id, 1);

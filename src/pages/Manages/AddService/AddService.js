@@ -16,11 +16,13 @@ const AddService = () => {
     };
 
     return (
-        <div className="container mx-auto">
-            <div>
+        <div>
+            <div className="">
                 <h2 className="text-center mt-5 mb-10 text-3xl font-bold">Add New Service</h2>
-                <div className="mx-auto">
+            </div>
+            <div >
 
+                <div className="container mx-auto my-10" >
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* register your input into the hook by invoking the "register" function */}
                         <input className="border border-2 p-4 d-block w-2/4  border-gray-900 rounded" placeholder="Title" {...register("title", { required: true })} /> <br />
@@ -48,6 +50,7 @@ const AddService = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 

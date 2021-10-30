@@ -4,16 +4,23 @@ import { useHistory } from 'react-router';
 const HomeServices = () => {
     const [services, setServices] = useState([]);
     const history = useHistory();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true)
         axios.get('http://localhost:6007/services')
             .then(res => setServices(res.data))
             .catch(err => console.log(err))
+            .finally(setIsLoading(false))
     }, []);
 
     const handleSingleService = (id) => {
         const url = `service/${id}`;
         history.push(url);
+    }
+
+    if (isLoading) {
+        return <div class="container mx-auto my-10 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
     }
 
     return (
