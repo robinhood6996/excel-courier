@@ -1,0 +1,12 @@
+.banner-area{
+    background-image: url('../../images/banner.png');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .banner-2{
+    background-image: url('../../images/banner2.png');
+    background-size: cover;
+    height: auto;
+} */
