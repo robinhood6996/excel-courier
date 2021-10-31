@@ -5,7 +5,7 @@ const AllBooks = memo(() => {
     const [bookings, setBookings] = useState([]);
     const [status, setStatus] = useState();
     useEffect(() => {
-        axios.get(`http://localhost:6007/bookings`)
+        axios.get(`https://excel-courier.herokuapp.com/bookings`)
             .then(res => setBookings(res.data))
     }, [status]);
 
@@ -13,7 +13,7 @@ const AllBooks = memo(() => {
     const handleDelete = (id) => {
         const confirm = window.confirm('Are you sure you want to delete ?');
         if (confirm) {
-            axios.delete(`http://localhost:6007/bookings/${id}`)
+            axios.delete(`https://excel-courier.herokuapp.com/bookings/${id}`)
                 .then(res => {
                     console.log(res)
                     if (res.data.deletedCount) {
@@ -27,7 +27,7 @@ const AllBooks = memo(() => {
 
     //Booking status change api
     const handleStatus = (id, status) => {
-        axios.put(`http://localhost:6007/bookings/${id}`, {
+        axios.put(`https://excel-courier.herokuapp.com/bookings/${id}`, {
             status: status
         })
             .then(res => {
@@ -43,7 +43,7 @@ const AllBooks = memo(() => {
             <div className="container mx-auto mt-10">
                 <div className="tables">
 
-                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 border">
+                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 ">
                         <thead className="text-white">
                             {
                                 bookings.map(book => <tr key={book._id} class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">

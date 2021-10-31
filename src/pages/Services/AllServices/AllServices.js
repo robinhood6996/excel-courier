@@ -9,7 +9,7 @@ const AllServices = () => {
     const history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:6007/services')
+        axios.get('https://excel-courier.herokuapp.com/services')
             .then(res => setServices(res.data))
             .catch(err => console.log(err))
     }, []);

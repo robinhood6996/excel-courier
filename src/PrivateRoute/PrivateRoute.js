@@ -7,12 +7,23 @@ const PrivateRoute = ({ children, ...rest }) => {
     const { user, isLoading } = useAuth();
 
     if (isLoading) {
-        // return <button type="button" class="bg-rose-600 ..." disabled>
-        //     <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-        //     </svg>
-        //     Processing
-        // </button>
-        return <div class="container mx-auto my-10 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
+
+        // return <div class="container mx-auto my-10 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
+        return <div className="my-10">
+            <div class="relative">
+                <div class="w-20 h-20 border-purple-200 border-2 rounded-full container mx-auto"></div>
+
+            </div>
+
+            <div class="relative">
+                <div class="w-10 h-10 border-purple-200 border-2 rounded-full container mx-auto"></div>
+
+            </div>
+
+            <div class="relative">
+                <div class="w-5 h-5 border-purple-200 border-2 rounded-full container mx-auto"></div>
+
+            </div></div>
     }
     return (
 

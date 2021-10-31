@@ -6,36 +6,60 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import useFirebase from '../../../Hooks/useFirebase';
+import Swal from 'sweetalert2';
 
 const BookService = () => {
-    //react hook form 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        axios.post('http://localhost:6007/bookings', data)
-            .then(res => {
-                if (res.data.insertedId) {
-                    alert('Congratulation Your Booking Sucessfull');
-                    reset();
-                }
-            })
 
-    };
+
 
     //get id from parameter
     const { id } = useParams();
     //setService state
     const [service, setService] = useState({});
+    const [isServiceLoading, setIsServiceLoading] = useState(true);
     //get user from auth
-    const { user } = useFirebase();
+    const { user, isLoading } = useFirebase();
     // //Input fields state
     // const [name, setName] = useState('');
     //fetch singledata from serer by api
     useEffect(() => {
-        axios.get(`http://localhost:6007/services/${id}`)
-            .then(res => setService(res.data));
+        setIsServiceLoading(true);
+        axios.get(`https://excel-courier.herokuapp.com/services/${id}`)
+            .then(res => setService(res.data))
+            .catch(error => console.log(error))
+            .finally(setIsServiceLoading(false));
     }, [])
 
+    //react hook form 
 
+    const defaultValues = {
+        name: user.displayName,
+        email: user.email,
+        service_title: service?.title
+
+    }
+
+    const { register, handleSubmit, reset } = useForm();
+    const onSubmit = data => {
+        axios.post('https://excel-courier.herokuapp.com/bookings', data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire(
+                        'Good job!',
+                        'Your Booking is submitted, Wait for our Confirmation',
+                        'success'
+                    );
+                    reset();
+                }
+
+            })
+
+
+    };
+
+    if (isLoading) {
+        return <><h2>Loading</h2></>;
+    }
 
     return (
         <div className="container mx-auto">
@@ -59,14 +83,14 @@ const BookService = () => {
                 <h2 className="sm:text-xl lg:text-4xl font-bold m-5 text-center p-4">Book {service?.title}</h2>
                 <form onSubmit={handleSubmit(onSubmit)} id="bookform">
                     {/* register your input into the hook by invoking the "register" function */}
-                    <input className=" bg-gray-200 p-4 d-block w-full  border-gray-400 rounded" defaultValue={user?.displayName} placeholder="Name"  {...register("name", { required: true })} readOnly /> <br />
-                    {errors.title && <span className="font-bold text-red-700">This field is required</span>}
+                    <input defaultValue={defaultValues.name} className=" bg-gray-200 p-4 d-block w-full  border-gray-400 rounded" {...register("name")} /> <br />
+
                     <br />
 
-                    <input defaultValue={user?.email} className=" bg-gray-200 p-4 d-block w-full border-gray-400 rounded"  {...register("email", { required: true })} readOnly /><br />
-                    {errors.image1 && <span className="font-bold text-red-700">This field is required</span>}<br />
+                    <input defaultValue={defaultValues.email} className=" bg-gray-200 p-4 d-block w-full border-gray-400 rounded"  {...register("email")} /><br />
 
-                    <input defaultValue={service.title} className=" bg-gray-200 p-4 d-block w-full border-gray-400 rounded mt-2"  {...register("service", { required: true })} readOnly /><br />
+
+                    <input placeholder="Enter Service Name" className=" bg-gray-200 p-4 d-block w-full border-gray-400 rounded mt-2"  {...register("service", { required: true })} /><br />
 
                     <input placeholder="Estimated Weight Ex: 2kg" className=" bg-gray-200 p-4 d-block w-2/4 border-gray-400 rounded mt-2"  {...register("weight", { required: true })} />
 

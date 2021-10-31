@@ -16,6 +16,8 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import Home from './pages/Home/Home';
 import Blogs from './pages/Blogs/Blogs';
 import Footer from './pages/Footer/Footer';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
 
 function App() {
   return (
@@ -35,6 +37,12 @@ function App() {
             </Route>
             <Route path="/blogs">
               <Blogs></Blogs>
+            </Route>
+            <Route path="/about">
+              <About></About>
+            </Route>
+            <Route path="/contact">
+              <Contact></Contact>
             </Route>
             <Route path="/login">
               <Login></Login>

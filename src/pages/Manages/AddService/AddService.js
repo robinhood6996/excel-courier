@@ -6,7 +6,7 @@ const AddService = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        axios.post('http://localhost:6007/services', data)
+        axios.post('https://excel-courier.herokuapp.com/services', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('Service added suceccfully');

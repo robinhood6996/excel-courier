@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import useFirebase from '../../../Hooks/useFirebase';
 import './MyBooks.css';
@@ -11,29 +12,28 @@ const MyBooks = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:6007/bookings/${user?.email}`)
+        axios.get(`https://excel-courier.herokuapp.com/bookings/${user?.email}`)
             .then(res => {
                 setBooking(res.data);
             });
-    }, [user]);
+    }, [status]);
 
     const handleDelete = (id) => {
         const confirm = window.confirm('Are you sure you want to delete ?');
+
         if (confirm) {
-            axios.delete(`http://localhost:6007/bookings/${id}`)
+            axios.delete(`https://excel-courier.herokuapp.com/bookings/${id}`)
                 .then(res => {
-                    console.log(res)
                     if (res.data.deletedCount) {
-                        alert('Sucessfully deleted your percel booking');
                         const restBookings = booking.filter(book => book._id !== id);
                         setBooking(restBookings);
                     }
                 });
         }
-    };
+    }
 
     const handleStatus = (id, status) => {
-        axios.put(`http://localhost:6007/bookings/${id}`, {
+        axios.put(`https://excel-courier.herokuapp.com/bookings/${id}`, {
             status: status
         })
             .then(res => {
@@ -50,7 +50,7 @@ const MyBooks = () => {
             <div className="container mx-auto mt-10">
                 <div className="tables">
 
-                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 border">
+                    <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 ">
                         <thead className="text-white">
                             {
                                 booking.map(book => <tr key={book._id} class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">

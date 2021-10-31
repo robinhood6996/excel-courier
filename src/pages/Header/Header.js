@@ -69,10 +69,10 @@ const Header = () => {
                                     </Link>
 
                                     <Link
-                                        to="/faq"
+                                        to="/contact"
                                         className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        FAQ
+                                        Contact Us
 
                                     </Link>
 
@@ -259,12 +259,11 @@ const Header = () => {
                                 </Link>
 
                                 <Link
-                                    to="/doctors"
+                                    to="/blogs"
                                     className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    Doctors
+                                    Blogs
                                 </Link>
-
                                 <Link
                                     to="/about"
                                     className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
@@ -273,17 +272,36 @@ const Header = () => {
                                 </Link>
 
                                 <Link
-                                    to="/faq"
+                                    to="/contact"
                                     className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    FAQ
+                                    Contact Us
                                 </Link>
+
+
                                 {/* conditional login and logout  */}
                                 {
                                     user.email ?
-                                        (<button className="text-white bg-red-500 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleLogout}>
-                                            Logout
-                                        </button>)
+                                        (<>
+                                            <Link
+                                                to="/allbookings"
+                                                className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" >
+                                                All Bookings
+                                            </Link>
+                                            <Link
+                                                to="/mybooking"
+                                                className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" >
+                                                My Bookings
+                                            </Link>
+                                            <Link
+                                                to="/addservice"
+                                                className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" >
+                                                Add Service
+                                            </Link>
+                                            <button className="text-white bg-red-500 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleLogout}>
+                                                Logout
+                                            </button>
+                                        </>)
 
                                         :
                                         (<Link
