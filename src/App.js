@@ -18,6 +18,7 @@ import Blogs from './pages/Blogs/Blogs';
 import Footer from './pages/Footer/Footer';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
             <PrivateRoute path="/service/:id">
               <BookService></BookService>
             </PrivateRoute>
-            <Route path="*">
+            <Route exact path="*">
+              <NotFound></NotFound>
             </Route>
           </Switch>
           <Footer></Footer>

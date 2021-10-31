@@ -8,12 +8,16 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
+
+    //Handle Google Signin
     const handleGoogleSignIn = () => {
         setIsLoading(true);
         const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider)
     }
 
+
+    //Locate the user
     useEffect(() => {
         const unSubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -27,6 +31,8 @@ const useFirebase = () => {
         return () => unSubscribed;
     }, [])
 
+
+    //Logout Handler
     const handleLogout = () => {
         setIsLoading(true)
         signOut(auth)

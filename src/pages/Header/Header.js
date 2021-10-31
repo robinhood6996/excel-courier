@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <div className="shadow-lg sticky top-0 bg-white z-50">
             <div>
-                {/* Display Username */}
+                {/* Display Username Conditonal for mobile version*/}
                 {
                     user.email ? (<div className="lg:hidden md:hidded sm:block text-center">
                         <h2 className="md:font-bold text-red-600 text-sm"><span className="md:font-sm text-gray-800 ">Welcome!</span> {user.displayName}</h2>

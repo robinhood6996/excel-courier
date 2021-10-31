@@ -10,24 +10,19 @@ import Swal from 'sweetalert2';
 
 const BookService = () => {
 
-
-
     //get id from parameter
     const { id } = useParams();
     //setService state
     const [service, setService] = useState({});
-    const [isServiceLoading, setIsServiceLoading] = useState(true);
     //get user from auth
     const { user, isLoading } = useFirebase();
-    // //Input fields state
-    // const [name, setName] = useState('');
+
+
     //fetch singledata from serer by api
     useEffect(() => {
-        setIsServiceLoading(true);
         axios.get(`https://excel-courier.herokuapp.com/services/${id}`)
             .then(res => setService(res.data))
             .catch(error => console.log(error))
-            .finally(setIsServiceLoading(false));
     }, [])
 
     //react hook form 
@@ -39,6 +34,7 @@ const BookService = () => {
 
     }
 
+    //Form Submit 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
         axios.post('https://excel-courier.herokuapp.com/bookings', data)
@@ -62,6 +58,7 @@ const BookService = () => {
     }
 
     return (
+        // Description of targerted service 
         <div className="container mx-auto">
             <h2 className="sm:text-xl lg:text-4xl font-bold m-5 text-center border-2 border-yellow-500 p-4">Book Our {service?.title} Service</h2>
             <div className="service grid sm:grid-cols-1 lg:grid-cols-2 gap-10">
@@ -79,6 +76,7 @@ const BookService = () => {
             </div>
 
 
+            {/* Form For Booking  */}
             <div className="booking-form-area mt-10 mb-10">
                 <h2 className="sm:text-xl lg:text-4xl font-bold m-5 text-center p-4">Book {service?.title}</h2>
                 <form onSubmit={handleSubmit(onSubmit)} id="bookform">
