@@ -3,6 +3,8 @@
 
 This is a courier service website. It provides service all over the world. Any one can book for percel delivery one place to another after creating an account. User can track his bookings status from profile options. Admin can update and delete any users bookings. Our Delivery man will take percel from departure location and deliver to the Delivery location based on package duration.
  
+ # Live Site: https://excel-courier.web.app/
+ 
 ## FONTEND TECHNOLOGY
 - React.js
 - Tailwind Css
